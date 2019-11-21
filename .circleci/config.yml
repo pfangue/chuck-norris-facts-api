@@ -63,7 +63,16 @@ jobs:
               --allow-unauthenticated \
               --memory 1G
 
-
+  helloci:
+    working_directory: ~/repo
+    docker:
+    - image: google/cloud-sdk:slim
+    steps:
+    - checkout
+    - run:
+        name: Say Hello
+        command: |
+          echo Hello Circle CI!
 
 workflows:
   version: 2
@@ -79,3 +88,6 @@ workflows:
           branches:
             only:
             - master
+  say-hello-to-ci:
+    jobs:
+    - helloci
